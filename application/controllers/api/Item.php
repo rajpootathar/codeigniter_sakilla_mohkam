@@ -65,16 +65,17 @@ class Item extends REST_Controller {
      *
      * @return Response
     */
-    public function index_put($id)
+    public function index_put()
     {
-        $id = $this->put('id');
+        $id = $this->put("id");
         $array = array(
             'title' => $this->put("title"),
             'description' => $this->put("description")
         );
         // $input = $this->put();
-        echo $id;
+        
         print_r($array);
+        
         //  $this->db->where('id',$id);
         $this->db->update('items', $array,array('id'=>$id));
      
