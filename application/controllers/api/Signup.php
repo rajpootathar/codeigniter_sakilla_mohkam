@@ -1,18 +1,20 @@
 <?php
-   
+
 require APPPATH . 'libraries/REST_Controller.php';
-     
-class Signup extends REST_Controller {
-    
-    public function __construct() {
-       parent::__construct();
-       $this->load->model('signup_model');
-       $this->load->library('session');
+
+class Signup extends REST_Controller
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('signup_model');
+        $this->load->library('session');
 
     }
 
     // public function index_get(){
-       
+
     //     $data = $this->sakila_model->read();
     //     if($data)
     //     $this->response($data,REST_Controller::HTTP_OK);
@@ -21,19 +23,22 @@ class Signup extends REST_Controller {
 
     // }
 
-    public function index_post(){
-        $address= $this->post('address');
+    public function index_post()
+    {
+        $address = $this->post('address');
         $fname = $this->post('first_name');
         $lname = $this->post('last_name');
         $email = $this->post('email');
         $uname = $this->post('username');
         $password = $this->post('password');
-        
-        $status = $this->signup_model->insert($address,$fname,$lname,$email,$uname,$password);
-        if($status)
-        $this->response($status,REST_Controller::HTTP_OK);
-        else
-        $this->response(['problem occured'],REST_Controller::HTTP_OK);
+
+        $status = $this->signup_model->insert($address, $fname, $lname, $email, $uname, $password);
+        if ($status) {
+            $this->response($status, REST_Controller::HTTP_OK);
+        } else {
+            $this->response(['problem occured'], REST_Controller::HTTP_OK);
+        }
+
     }
 
     // public function index_put(){
@@ -62,4 +67,3 @@ class Signup extends REST_Controller {
     //     $this->response(['problem occured'],REST_Controller::HTTP_OK);
     // }
 }
-?>

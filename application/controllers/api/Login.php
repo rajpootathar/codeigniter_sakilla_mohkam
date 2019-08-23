@@ -1,37 +1,41 @@
 <?php
-   
+
 require APPPATH . 'libraries/REST_Controller.php';
-     
-class Login extends REST_Controller {
-    
-    public function __construct() {
-       parent::__construct();
-       $this->load->model('login_model');
-       $this->load->library('session');
+
+class Login extends REST_Controller
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('login_model');
+        $this->load->library('session');
     }
 
-    public function index_get(){
-       
+    public function index_get()
+    {
+
         $data = $this->sakila_model->read();
-        if($data)
-        $this->response($data,REST_Controller::HTTP_OK);
-        else
-        $this->response(['error occured'],REST_Controller::HTTP_OK);
+        if ($data) {
+            $this->response($data, REST_Controller::HTTP_OK);
+        } else {
+            $this->response(['error occured'], REST_Controller::HTTP_OK);
+        }
 
     }
 
-    public function index_post(){
+    public function index_post()
+    {
 
         $username = $this->post('username');
         $password = $this->post('password');
         // print_r($username);
         // print_r($password);
-       $result = $this->login_model->check($username,$password);
+        $result = $this->login_model->check($username, $password);
         // print_r($data);
         // $result = json_encode($result);
-        $this->response($result,REST_Controller::HTTP_OK);
-        
-        
+        $this->response($result, REST_Controller::HTTP_OK);
+
         // $name = $this->post();
         // $this->session->set_userdata('name',$name);
         // $status = $this->sakila_model->create();
@@ -39,7 +43,6 @@ class Login extends REST_Controller {
         // $this->response(['Record added'],REST_Controller::HTTP_OK);
         // else
         // $this->response(['problem occured'],REST_Controller::HTTP_OK);
-
 
     }
 
@@ -69,4 +72,3 @@ class Login extends REST_Controller {
     //     $this->response(['problem occured'],REST_Controller::HTTP_OK);
     // }
 }
-?>
